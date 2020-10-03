@@ -5,9 +5,32 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.7.0.1239" />
+    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1451" />
     <PackageReference Include="Xamarin.Essentials.Interfaces" Version="1.5.3.2" />
     <PackageReference Include="Prism.DryIoc.Forms" Version="7.2.0.1422" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\" />
+    <Folder Include="Features\PokeAPI\" />
+    <Folder Include="Features\PokeAPI\Presenter\" />
+    <Folder Include="Features\PokeAPI\3 - External\" />
+    <Folder Include="Features\PokeAPI\2 - Data\" />
+    <Folder Include="Features\PokeAPI\1 - Domain\" />
+    <Folder Include="Features\PokeAPI\2 - Data\Models\" />
+    <Folder Include="Features\PokeAPI\3 - External\Datasources\" />
+    <Folder Include="Core\" />
+    <Folder Include="Core\Utils\" />
+    <Folder Include="Core\Utils\Constants\" />
+    <Folder Include="Core\Services\" />
+    <Folder Include="Features\PokeAPI\1 - Domain\Repositories Interfaces\" />
+    <Folder Include="Features\PokeAPI\1 - Domain\Entities\" />
+    <Folder Include="Features\PokeAPI\1 - Domain\Usecases\" />
+    <Folder Include="Features\PokeAPI\2 - Data\Datasources Interfaces\" />
+    <Folder Include="Features\PokeAPI\2 - Data\Repositories\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Features\PokeAPI\Presenter\Views\MainPage.xaml.cs" />
+  </ItemGroup>
 </Project>

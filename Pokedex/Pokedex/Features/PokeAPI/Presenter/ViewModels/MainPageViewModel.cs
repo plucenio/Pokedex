@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Pokedex.ViewModels
+namespace Pokedex.Features.PokeAPI.Presenter.ViewModels
 {
     public class MainPageViewModel : ViewModelBase
     {
