@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Pokedex.Core.Services;
+using Pokedex.Features.PokeAPI.Data.Datasources;
 using Pokedex.Features.PokeAPI.Data.Models;
-using Pokedex.Features.PokeAPI.Domain.Datasources;
 
 namespace Pokedex.Features.PokeAPI.External.Datasources
 {
@@ -15,9 +15,16 @@ namespace Pokedex.Features.PokeAPI.External.Datasources
             _httpClientService = httpClientService;
         }
 
-        public async Task<PokemonModel> GetPokemon()
+        public async Task<PageModel> GetPage(string pageId)
         {
-            var response = await _httpClientService.GetAsync("");
+            var response = await _httpClientService.GetAsync($"pokemon/{pageId}");
+            var str = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<PageModel>(str);
+        }
+
+        public async Task<PokemonModel> GetPokemon(long pokemonId)
+        {
+            var response = await _httpClientService.GetAsync($"pokemon/{pokemonId}");
             var str = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<PokemonModel>(str);
         }

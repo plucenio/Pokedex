@@ -1,10 +1,13 @@
 ﻿using System.Threading.Tasks;
 using Pokedex.Features.PokeAPI.Data.Models;
+using Pokedex.Features.PokeAPI.Domain.Entities;
 
-namespace Pokedex.Features.PokeAPI.Domain.Datasources
+namespace Pokedex.Features.PokeAPI.Domain.RepositoriesInterfaces
 {
     public interface IPokeAPIRepository
     {
-        Task<PokemonModel> GetPokemon();
+        Task<Pokemon> GetPokemon(long pokemonId);
+
+        Task<Page> GetPage(string pageId);
     }
 }

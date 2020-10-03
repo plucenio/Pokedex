@@ -9,12 +9,12 @@
     <PackageReference Include="Xamarin.Essentials.Interfaces" Version="1.5.3.2" />
     <PackageReference Include="Prism.DryIoc.Forms" Version="7.2.0.1422" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="LiteDB" Version="5.0.9" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Features\" />
     <Folder Include="Features\PokeAPI\" />
-    <Folder Include="Features\PokeAPI\Presenter\" />
     <Folder Include="Features\PokeAPI\3 - External\" />
     <Folder Include="Features\PokeAPI\2 - Data\" />
     <Folder Include="Features\PokeAPI\1 - Domain\" />
@@ -29,6 +29,8 @@
     <Folder Include="Features\PokeAPI\1 - Domain\Usecases\" />
     <Folder Include="Features\PokeAPI\2 - Data\Datasources Interfaces\" />
     <Folder Include="Features\PokeAPI\2 - Data\Repositories\" />
+    <Folder Include="ViewModels\" />
+    <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Features\PokeAPI\Presenter\Views\MainPage.xaml.cs" />

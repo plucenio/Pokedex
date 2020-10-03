@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 using Newtonsoft.Json;
+using Pokedex.Features.PokeAPI.Domain.Entities;
 
 namespace Pokedex.Features.PokeAPI.Data.Models
 {
-    public partial class PokemonModel
+    public partial class PokemonModel : Pokemon
     {
         [JsonProperty("abilities")]
         public Ability[] Abilities { get; set; }
@@ -56,6 +59,34 @@ namespace Pokedex.Features.PokeAPI.Data.Models
 
         [JsonProperty("weight")]
         public long Weight { get; set; }
+
+        public Pokemon ToEntity()
+        {
+            var t = teste(this.Sprites.FrontDefault.AbsoluteUri.ToString());
+
+            return new Pokemon()
+            {
+                Id = this.Id,
+                Name = this.Name,
+                TypesString = this.Types.ToString(),
+                Height = this.Height,
+                Weight = this.Weight,
+            };
+        }
+
+        private byte[] teste(string imageUrl)
+        {
+            var assembly = typeof(App).GetTypeInfo().Assembly;
+            var items = assembly.GetManifestResourceNames();
+
+            Stream stream = assembly.GetManifestResourceStream($"{imageUrl}");
+            using (var reader = new StreamReader(stream))
+            {
+                var json = reader.ReadToEnd();
+                var t = json;
+            }
+            return null;
+        }
     }
 
     public partial class Ability

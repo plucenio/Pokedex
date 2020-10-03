@@ -3,11 +3,15 @@ using Prism.Ioc;
 using Xamarin.Essentials.Interfaces;
 using Xamarin.Essentials.Implementation;
 using Xamarin.Forms;
-using Pokedex.Features.PokeAPI.Presenter.Views;
-using Pokedex.Features.PokeAPI.Presenter.ViewModels;
 using Pokedex.Core.Services;
 using Pokedex.Features.PokeAPI.External.Datasources;
-using Pokedex.Features.PokeAPI.Domain.Datasources;
+using Pokedex.Features.PokeAPI.Data.Datasources;
+using Pokedex.Features.PokeAPI.Domain.RepositoriesInterfaces;
+using Pokedex.Features.PokeAPI.Domain.Usecases;
+using Pokedex.Features.PokeAPI.Data.Repositories;
+using Pokedex.Features.PokeAPI.Data.DatasourcesInterfaces;
+using Pokedex.Views;
+using Pokedex.ViewModels;
 
 namespace Pokedex
 {
@@ -31,7 +35,8 @@ namespace Pokedex
             containerRegistry.RegisterSingleton<IHttpClientService, HttpClientService>();
             containerRegistry.RegisterSingleton<IPokeAPIDatasource, PokeAPIDatasource>();
             containerRegistry.RegisterSingleton<IPokeAPIRepository, PokeAPIRepository>();
-            containerRegistry.RegisterSingleton<IPokeAPIUsecase, PokeAPIUsecase>();
+            containerRegistry.RegisterSingleton<IPokedexUsecase, PokedexUsecase>();
+            containerRegistry.RegisterSingleton<ILocalRepository, LocalRepository>();
 
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();

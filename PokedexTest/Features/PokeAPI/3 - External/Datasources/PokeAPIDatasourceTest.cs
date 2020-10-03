@@ -32,7 +32,7 @@ namespace PokedexTest
 
             var datasource = new PokeAPIDatasource(myMoq.Object);
 
-            var pokemon = await datasource.GetPokemon();
+            var pokemon = await datasource.GetPokemon(31);
 
             Assert.NotNull(pokemon);
 
@@ -52,7 +52,7 @@ namespace PokedexTest
 
             var datasource = new PokeAPIDatasource(myMoq.Object);
 
-            var pokemon = await datasource.GetPokemon();
+            var pokemon = await datasource.GetPokemon(31);
 
             Assert.NotNull(pokemon);
 
@@ -72,7 +72,7 @@ namespace PokedexTest
 
             var datasource = new PokeAPIDatasource(myMoq.Object);
 
-            var pokemon = await datasource.GetPokemon();
+            var pokemon = await datasource.GetPokemon(31);
 
             Assert.Null(pokemon);
         }
@@ -90,7 +90,7 @@ namespace PokedexTest
 
             var datasource = new PokeAPIDatasource(myMoq.Object);
 
-            var pokemon = await datasource.GetPokemon();
+            var pokemon = await datasource.GetPokemon(31);
 
             Assert.NotNull(pokemon);
 

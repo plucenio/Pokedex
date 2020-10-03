@@ -1,9 +1,10 @@
 ﻿using System;
 using Newtonsoft.Json;
+using Pokedex.Features.PokeAPI.Domain.Entities;
 
 namespace Pokedex.Features.PokeAPI.Data.Models
 {
-    public partial class PokemonPageModel
+    public partial class PageModel : Page
     {
         [JsonProperty("count")]
         public long Count { get; set; }
@@ -16,6 +17,11 @@ namespace Pokedex.Features.PokeAPI.Data.Models
 
         [JsonProperty("results")]
         public Result[] Results { get; set; }
+
+        public Page ToEntity(string id)
+        {
+            return new Page() { Id = id };
+        }
     }
 
     public partial class Result
