@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Pokedex.Core.Services;
 using Pokedex.Features.PokeAPI.Data.Datasources;

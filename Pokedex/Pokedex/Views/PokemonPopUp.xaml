@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<popup:PopupPage xmlns="http://xamarin.com/schemas/2014/forms" 
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+                 Padding="35,0,35,0"
+                 x:Class="Pokedex.Views.PokemonPopUp"
+                 HasSystemPadding="False" >
+    <pancake:PancakeView CornerRadius="25"
+                         BackgroundGradientStartColor="White"
+                         BackgroundGradientEndColor="LightBlue"
+                         BackgroundGradientAngle="90"
+                         BackgroundColor="White"
+                         Margin="20,40,20,40">
+        <Label Text="Pokemon" 
+               TextColor="White"/>
+    </pancake:PancakeView>
+</popup:PopupPage>

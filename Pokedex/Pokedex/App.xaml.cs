@@ -12,6 +12,7 @@ using Pokedex.Features.PokeAPI.Data.Repositories;
 using Pokedex.Features.PokeAPI.Data.DatasourcesInterfaces;
 using Pokedex.Views;
 using Pokedex.ViewModels;
+using Prism.Plugin.Popups;
 
 namespace Pokedex
 {
@@ -40,6 +41,9 @@ namespace Pokedex
 
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+            containerRegistry.RegisterForNavigation<PokemonPopUp, PokemonPopUpViewModel>();
+
+            containerRegistry.RegisterPopupNavigationService();
         }
     }
 }

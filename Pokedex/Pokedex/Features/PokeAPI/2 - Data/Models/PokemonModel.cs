@@ -62,8 +62,6 @@ namespace Pokedex.Features.PokeAPI.Data.Models
 
         public Pokemon ToEntity()
         {
-            var t = teste(this.Sprites.FrontDefault.AbsoluteUri.ToString());
-
             return new Pokemon()
             {
                 Id = this.Id,
@@ -71,21 +69,8 @@ namespace Pokedex.Features.PokeAPI.Data.Models
                 TypesString = this.Types.ToString(),
                 Height = this.Height,
                 Weight = this.Weight,
+                FrontDefault = this.Sprites.FrontDefault.AbsoluteUri
             };
-        }
-
-        private byte[] teste(string imageUrl)
-        {
-            var assembly = typeof(App).GetTypeInfo().Assembly;
-            var items = assembly.GetManifestResourceNames();
-
-            Stream stream = assembly.GetManifestResourceStream($"{imageUrl}");
-            using (var reader = new StreamReader(stream))
-            {
-                var json = reader.ReadToEnd();
-                var t = json;
-            }
-            return null;
         }
     }
 

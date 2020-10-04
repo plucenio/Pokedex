@@ -20,11 +20,18 @@ namespace Pokedex.Features.PokeAPI.Data.Models
 
         public Page ToEntity(string id)
         {
-            return new Page() { Id = id };
+            var page = new Page()
+            {
+                Id = id,
+                Next = this.Next,
+                Previous = this.Previous,
+                Pokemons = Results
+            };
+            return page;
         }
     }
 
-    public partial class Result
+    public partial class Result : ItemListPokemon
     {
         [JsonProperty("name")]
         public string Name { get; set; }

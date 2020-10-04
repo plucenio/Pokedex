@@ -3,7 +3,6 @@ using LiteDB;
 using Pokedex.Core.Services;
 using Pokedex.Features.PokeAPI.Data.DatasourcesInterfaces;
 using Pokedex.Features.PokeAPI.Domain.Entities;
-using Xamarin.Forms;
 
 namespace Pokedex.Features.PokeAPI.Data.Repositories
 {
@@ -12,13 +11,15 @@ namespace Pokedex.Features.PokeAPI.Data.Repositories
         private string _stringConnection;
         private LiteDatabase _db;
         private LiteCollection<Pokemon> _pokemons;
+        private LiteCollection<Page> _pages;
 
         public LocalRepository()
         {
-            _stringConnection = string.Format("filename={0};journal=false", DependencyService.Get<IFileService>().GetLocalFilePath("Pokedex.db"));
+            _stringConnection = string.Format("filename={0};journal=false", Xamarin.Forms.DependencyService.Get<IFileService>().GetLocalFilePath("Pokedex.db"));
 
             _db = new LiteDatabase(_stringConnection);
             _pokemons = (LiteCollection<Pokemon>)_db.GetCollection<Pokemon>();
+            _pages = (LiteCollection<Page>)_db.GetCollection<Page>();
         }
 
         public void SavePokemon(Pokemon pokemon)
@@ -31,14 +32,14 @@ namespace Pokedex.Features.PokeAPI.Data.Repositories
             return _pokemons.FindById(id);
         }
 
-        public void SavePage(Domain.Entities.Page page)
+        public void SavePage(Page page)
         {
-            throw new NotImplementedException();
+            _pages.Insert(page);
         }
 
-        public Domain.Entities.Page GetPage(string pageId)
+        public Page GetPage(string pageId)
         {
-            throw new NotImplementedException();
+            return _pages.FindById(pageId);
         }
     }
 }

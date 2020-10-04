@@ -36,6 +36,9 @@ namespace Pokedex.Features.PokeAPI.Domain.Usecases
 
         public async Task<Page> GetPage(string pageId)
         {
+            if (pageId == null)
+                pageId = "?limit=5&offset=0";
+
             var page = _localRepository.GetPage(pageId);
             if (page == null)
             {

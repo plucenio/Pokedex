@@ -10,6 +10,9 @@
     <PackageReference Include="Prism.DryIoc.Forms" Version="7.2.0.1422" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="LiteDB" Version="5.0.9" />
+    <PackageReference Include="Xamarin.Forms.PancakeView" Version="2.1.0.714" />
+    <PackageReference Include="Rg.Plugins.Popup" Version="2.0.0.5" />
+    <PackageReference Include="Prism.Plugin.Popups" Version="7.2.0.1046" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,10 +1,12 @@
-﻿using Xamarin.Forms;
+﻿using System;
 
 namespace Pokedex.Features.PokeAPI.Domain.Entities
 {
     public class Pokemon
     {
         public long Id { get; set; }
+
+        public Uri Uri { get; set; }
 
         public string Name { get; set; }
 
@@ -14,6 +16,6 @@ namespace Pokedex.Features.PokeAPI.Domain.Entities
 
         public long Weight { get; set; }
 
-        public ImageSource FrontDefault { get; set; }
+        public string FrontDefault { get; set; }
     }
 }
