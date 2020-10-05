@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<popup:PopupPage xmlns="http://xamarin.com/schemas/2014/forms" 
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+                 x:Class="Pokedex.Views.PokemonPopUp"
+                 HasSystemPadding="False" >
+    <pancake:PancakeView CornerRadius="25"
+                         BackgroundGradientStartColor="White"
+                         BackgroundGradientEndColor="LightBlue"
+                         BackgroundGradientAngle="90"
+                         BackgroundColor="White"
+                         Margin="20,100,20,100">
+        <StackLayout Margin="20">
+            <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="Center">
+                <Label Text="Id:"
+                       TextColor="Black"/>
+                <Label Text="{Binding Pokemon.Id}"
+                       TextColor="Black"
+                       HorizontalTextAlignment="End"/>
+            </StackLayout>
+            <Image Source="{Binding ImgSource}"
+                   VerticalOptions="FillAndExpand"
+                   HorizontalOptions="FillAndExpand"/>
+            <Label Text="{Binding Pokemon.Name}"
+                   Style="{StaticResource LabelStyle}"
+                   FontSize="Title"
+                   TextColor="Black"/>
+            <Grid Margin="20,0,20,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackLayout>
+                    <Label Text="Height:"
+                           TextColor="Black"/>
+                    <Label Text="Weight:"
+                           TextColor="Black"/>
+                    <Label Text="Type:"
+                           TextColor="Black"/>
+                </StackLayout>
+                <StackLayout Grid.Column="1"
+                             HorizontalOptions="End">
+                    <Label Text="{Binding Pokemon.Height}"
+                           TextColor="Black"
+                           HorizontalTextAlignment="End"/>
+                    <Label Text="{Binding Pokemon.Weight}"
+                           TextColor="Black"
+                           HorizontalTextAlignment="End"/>
+                    <Label Text="{Binding Pokemon.TypeString}"
+                           TextColor="Black"
+                           HorizontalTextAlignment="End"/>
+                </StackLayout>
+            </Grid>
+            <Button Text="Close"
+                    Command="{Binding CloseCommand}"/>
+        </StackLayout>
+    </pancake:PancakeView>
+</popup:PopupPage>

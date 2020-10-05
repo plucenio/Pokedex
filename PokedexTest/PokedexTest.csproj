@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3"><IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+<PrivateAssets>all</PrivateAssets>
+</PackageReference>
+    <PackageReference Include="coverlet.collector" Version="1.2.0" />
+    <PackageReference Include="Moq" Version="4.14.6" />
+    <PackageReference Include="FakeItEasy" Version="6.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\" />
+    <Folder Include="Features\PokeAPI\" />
+    <Folder Include="Features\PokeAPI\3 - External\" />
+    <Folder Include="Features\PokeAPI\3 - External\Datasources\" />
+    <Folder Include="Features\PokeAPI\Fixtures\" />
+    <Folder Include="Features\PokeAPI\Utils\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Pokedex\Pokedex\Pokedex.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Features\PokeAPI\Fixtures\Pokemon.json" />
+    <None Remove="Features\PokeAPI\Fixtures\PokemonPage.json" />
+    <None Remove="Features\PokeAPI\Fixtures\Empty.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Features\PokeAPI\Fixtures\Pokemon31.json" />
+    <EmbeddedResource Include="Features\PokeAPI\Fixtures\PokemonPage.json" />
+    <EmbeddedResource Include="Features\PokeAPI\Fixtures\Empty.json" />
+  </ItemGroup>
+</Project>

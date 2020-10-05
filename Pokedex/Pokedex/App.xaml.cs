@@ -1,10 +1,18 @@
 using Prism;
 using Prism.Ioc;
-using Pokedex.ViewModels;
-using Pokedex.Views;
 using Xamarin.Essentials.Interfaces;
 using Xamarin.Essentials.Implementation;
 using Xamarin.Forms;
+using Pokedex.Core.Services;
+using Pokedex.Features.PokeAPI.External.Datasources;
+using Pokedex.Features.PokeAPI.Data.Datasources;
+using Pokedex.Features.PokeAPI.Domain.RepositoriesInterfaces;
+using Pokedex.Features.PokeAPI.Domain.Usecases;
+using Pokedex.Features.PokeAPI.Data.Repositories;
+using Pokedex.Features.PokeAPI.Data.DatasourcesInterfaces;
+using Pokedex.Views;
+using Pokedex.ViewModels;
+using Prism.Plugin.Popups;
 
 namespace Pokedex
 {
@@ -25,9 +33,17 @@ namespace Pokedex
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
+            containerRegistry.RegisterSingleton<IHttpClientService, HttpClientService>();
+            containerRegistry.RegisterSingleton<IPokeAPIDatasource, PokeAPIDatasource>();
+            containerRegistry.RegisterSingleton<IPokeAPIRepository, PokeAPIRepository>();
+            containerRegistry.RegisterSingleton<IPokedexUsecase, PokedexUsecase>();
+            containerRegistry.RegisterSingleton<ILocalRepository, LocalRepository>();
 
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+            containerRegistry.RegisterForNavigation<PokemonPopUp, PokemonPopUpViewModel>();
+
+            containerRegistry.RegisterPopupNavigationService();
         }
     }
 }
