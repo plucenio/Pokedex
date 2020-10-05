@@ -33,9 +33,11 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <StackLayout>
-                    <Label Text="Height"
+                    <Label Text="Height:"
                            TextColor="Black"/>
-                    <Label Text="Weight"
+                    <Label Text="Weight:"
+                           TextColor="Black"/>
+                    <Label Text="Type:"
                            TextColor="Black"/>
                 </StackLayout>
                 <StackLayout Grid.Column="1"
@@ -46,8 +48,13 @@
                     <Label Text="{Binding Pokemon.Weight}"
                            TextColor="Black"
                            HorizontalTextAlignment="End"/>
+                    <Label Text="{Binding Pokemon.TypeString}"
+                           TextColor="Black"
+                           HorizontalTextAlignment="End"/>
                 </StackLayout>
             </Grid>
+            <Button Text="Close"
+                    Command="{Binding CloseCommand}"/>
         </StackLayout>
     </pancake:PancakeView>
 </popup:PopupPage>

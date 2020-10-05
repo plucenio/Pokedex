@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Windows.Input;
 using Pokedex.Features.PokeAPI.Domain.Entities;
 using Pokedex.Features.PokeAPI.Domain.Usecases;
+using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
 using Xamarin.Forms;
@@ -36,11 +38,17 @@ namespace Pokedex.ViewModels
 
         public IPokedexUsecase _usecase { get; set; }
 
+        public ICommand CloseCommand { get; set; }
+
         public PokemonPopUpViewModel(INavigationService navigationService, IPageDialogService pageDialogService, IPokedexUsecase usecase)
             : base(navigationService)
         {
             _pageDialogService = pageDialogService;
             _usecase = usecase;
+            CloseCommand = new DelegateCommand(async () =>
+            {
+                await NavigationService.GoBackAsync();
+            });
         }
 
         public override async void OnNavigatedTo(INavigationParameters parameters)

@@ -101,9 +101,7 @@ namespace Pokedex.ViewModels
         public override async void OnNavigatedTo(INavigationParameters parameters)
         {
             if (Page == null)
-            {
                 _ = await RefreshPage(null);
-            }
 
             NextCommand.CanExecute(null);
             base.OnNavigatedTo(parameters);
