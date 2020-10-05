@@ -3,8 +3,8 @@ namespace Pokedex.Features.PokeAPI.Domain.Entities
 {
     public class ItemListPokemon
     {
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
 
-        public Uri Url { get; set; }
+        public virtual Uri Url { get; set; }
     }
 }

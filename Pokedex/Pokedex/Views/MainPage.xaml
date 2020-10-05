@@ -2,54 +2,78 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-             x:Class="Pokedex.Views.MainPage">
+             xmlns:xamanimation="clr-namespace:Xamanimation;assembly=Xamanimation"
+             xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             x:Class="Pokedex.Views.MainPage"
+             x:Name="backgroundpage"
+             BackgroundColor="Yellow">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <xamanimation:StoryBoard x:Key="StoryBoardTranslation"
+                                     Target="{x:Reference MainStackLayout}">
+                <xamanimation:TranslateToAnimation TranslateY="0"
+                                                   Duration="250"
+                                                   Delay="2200"/>
+                <xamanimation:ColorAnimation Target="{x:Reference backgroundpage}"
+                                             ToColor="LightSeaGreen"
+                                             Duration="500"/>
+            </xamanimation:StoryBoard>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout BackgroundColor="Red">
+        <Grid>
+            <lottie:AnimationView x:Name="animationView" 
+	                              Animation="pikachu.json" 
+	                              AutoPlay="True"
+	                              VerticalOptions="FillAndExpand" 
+	                              HorizontalOptions="FillAndExpand" />
+            <StackLayout x:Name="MainStackLayout"
+                     TranslationY="-1000">
             <pancake:PancakeView CornerRadius="25"
-                                 BackgroundGradientStartColor="White"
-                                 BackgroundGradientEndColor="LightBlue"
                                  BackgroundGradientAngle="90"
-                                 BackgroundColor="White"
+                                 BackgroundGradientStartColor="White"
+                                 BackgroundGradientEndColor="Black"
                                  Margin="20,40,20,40">
-                <CollectionView ItemsSource="{Binding Pokemons}"
-                                SelectedItem="{Binding Pokemon, Mode=TwoWay}"
-                                VerticalScrollBarVisibility="Always"
-                                Margin="20">
-                    <CollectionView.ItemTemplate>
+                <ListView ItemsSource="{Binding Pokemons}"
+                          ItemSelected="ListView_ItemSelected"
+                          SelectedItem="{Binding Pokemon}"
+                          RowHeight="85">
+                    <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Grid HeightRequest="75">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="40*"/>
-                                    <ColumnDefinition Width="50*"/>
-                                </Grid.ColumnDefinitions>
-                                <Label Text="{Binding Name}"
-                                       FontSize="Title"
-                                       Grid.Column="1"
-                                       VerticalOptions="Center"
-                                       HorizontalOptions="Start"/>
-                                <Button Grid.ColumnSpan="2"
-                                        Opacity="0.5"
-                                        BackgroundColor="LightCyan"
-                                        CornerRadius="10"
-                                        Command="{Binding ShowPokemonCommand}"/>
-                            </Grid>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="40*"/>
+                                        <ColumnDefinition Width="50*"/>
+                                    </Grid.ColumnDefinitions>
+                                        <Label Text="{Binding Name}"
+                                               FontSize="Subtitle"
+                                               TextColor="Black"
+                                               Style="{StaticResource LabelStyle}"
+                                               Grid.Column="1"
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="Start"/>
+                                </Grid>
+                            </ViewCell>
                         </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                    </ListView.ItemTemplate>
+                </ListView>
             </pancake:PancakeView>
             <StackLayout Orientation="Horizontal"
                          HorizontalOptions="Center">
-                <Button Opacity="0.5"
-                        BackgroundColor="LightCyan"
-                        CornerRadius="10"
-                        Command="{Binding ShowPokemonCommand}"/>
-                <Button CornerRadius="10" Text='&lt;'
+                <Button CornerRadius="25" Text='&lt;'
                         BackgroundColor="White"
+                        HeightRequest="75"
+                        WidthRequest="75"
                         Command="{Binding PreviousCommand}"/>
-                <Button CornerRadius="10" Text='>'
+                <Button CornerRadius="25" Text='>'
                         BackgroundColor="White"
+                        HeightRequest="75"
+                        WidthRequest="75"
                         Command="{Binding NextCommand}"/>
+
             </StackLayout>
         </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

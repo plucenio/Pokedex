@@ -26,7 +26,7 @@ namespace Pokedex.Core.Services
             HttpClient client = new HttpClient
             {
                 BaseAddress = new Uri(Constants.URL_API),
-                Timeout = TimeSpan.FromSeconds(100)
+                Timeout = TimeSpan.FromSeconds(2000)
             };
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));

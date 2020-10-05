@@ -16,12 +16,14 @@ namespace Pokedex.Features.PokeAPI.Data.Repositories
 
         public async Task<Page> GetPage(string pageId)
         {
-            return (await _pokeAPIDatasource.GetPage(pageId)).ToEntity(pageId);
+            var model = await _pokeAPIDatasource.GetPage(pageId);
+            return model.ToEntity(pageId);
         }
 
-        public async Task<Pokemon> GetPokemon(long pokemonId)
+        public async Task<Pokemon> GetPokemon(string pokemonName)
         {
-            return (await _pokeAPIDatasource.GetPokemon(pokemonId)).ToEntity();
+            var model = await _pokeAPIDatasource.GetPokemon(pokemonName);
+            return model.ToEntity();
         }
     }
 }

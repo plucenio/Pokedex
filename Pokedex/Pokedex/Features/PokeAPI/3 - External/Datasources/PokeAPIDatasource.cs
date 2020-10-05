@@ -23,9 +23,9 @@ namespace Pokedex.Features.PokeAPI.External.Datasources
             return JsonConvert.DeserializeObject<PageModel>(str);
         }
 
-        public async Task<PokemonModel> GetPokemon(long pokemonId)
+        public async Task<PokemonModel> GetPokemon(string pokemonName)
         {
-            var response = await _httpClientService.GetAsync($"pokemon/{pokemonId}");
+            var response = await _httpClientService.GetAsync($"pokemon/{pokemonName}");
             var str = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<PokemonModel>(str);
         }

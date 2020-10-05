@@ -7,7 +7,7 @@ namespace Pokedex.Features.PokeAPI.Domain.Usecases
 {
     public interface IPokedexUsecase
     {
-        Task<Pokemon> GetPokemon(long pokemonId);
+        Task<Pokemon> GetPokemon(string pokemonName);
 
         Task<Page> GetPage(string pageId);
     }
@@ -23,12 +23,12 @@ namespace Pokedex.Features.PokeAPI.Domain.Usecases
             _localRepository = localRepository;
         }
 
-        public async Task<Pokemon> GetPokemon(long pokemonId)
+        public async Task<Pokemon> GetPokemon(string prokemonName)
         {
-            var pokemon = _localRepository.GetPokemon(pokemonId);
+            var pokemon = _localRepository.GetPokemon(prokemonName);
             if (pokemon == null)
             {
-                pokemon = await _pokeAPIRepository.GetPokemon(pokemonId);
+                pokemon = await _pokeAPIRepository.GetPokemon(prokemonName);
                 _localRepository.SavePokemon(pokemon);
             }
             return pokemon;

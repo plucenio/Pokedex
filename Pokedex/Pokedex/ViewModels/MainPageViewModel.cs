@@ -29,6 +29,8 @@ namespace Pokedex.ViewModels
             }
         }
 
+        private ItemListPokemon pokemon;
+
         public ItemListPokemon Pokemon
         {
             get => pokemon;
@@ -42,7 +44,6 @@ namespace Pokedex.ViewModels
         public ICommand ShowPokemonCommand { get; set; }
 
         private IPokedexUsecase _usecase;
-        private ItemListPokemon pokemon;
 
         public MainPageViewModel(INavigationService navigationService, IPokedexUsecase usecase)
             : base(navigationService)
@@ -71,7 +72,13 @@ namespace Pokedex.ViewModels
 
             ShowPokemonCommand = new DelegateCommand(async () =>
             {
-                await NavigationService.NavigateAsync("NavigationPage/PokemonPopUp");
+                var name = Pokemon.Name;
+                await NavigationService.NavigateAsync("NavigationPage/PokemonPopUp",
+                    new NavigationParameters()
+                    {
+                        { Core.Utils.Constants.Constants.pokemonParameter, name }
+                    }
+                );
             });
         }
 
@@ -93,7 +100,11 @@ namespace Pokedex.ViewModels
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
         {
-            var ret = await RefreshPage(null);
+            if (Page == null)
+            {
+                _ = await RefreshPage(null);
+            }
+
             NextCommand.CanExecute(null);
             base.OnNavigatedTo(parameters);
         }

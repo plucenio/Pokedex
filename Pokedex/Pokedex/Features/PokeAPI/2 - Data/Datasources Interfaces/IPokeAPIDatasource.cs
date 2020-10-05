@@ -5,7 +5,7 @@ namespace Pokedex.Features.PokeAPI.Data.Datasources
 {
     public interface IPokeAPIDatasource
     {
-        Task<PokemonModel> GetPokemon(long pokemonId);
+        Task<PokemonModel> GetPokemon(string pokemonName);
 
         Task<PageModel> GetPage(string pageId);
     }

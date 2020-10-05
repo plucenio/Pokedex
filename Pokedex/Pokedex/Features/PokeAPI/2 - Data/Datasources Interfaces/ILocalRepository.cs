@@ -7,7 +7,7 @@ namespace Pokedex.Features.PokeAPI.Data.DatasourcesInterfaces
     {
         void SavePokemon(Pokemon pokemon);
 
-        Pokemon GetPokemon(long pokemonId);
+        Pokemon GetPokemon(string pokemonName);
 
         void SavePage(Page page);
 

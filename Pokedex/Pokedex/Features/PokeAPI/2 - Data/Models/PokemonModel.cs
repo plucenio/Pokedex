@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
 using Newtonsoft.Json;
 using Pokedex.Features.PokeAPI.Domain.Entities;
 
@@ -22,13 +20,13 @@ namespace Pokedex.Features.PokeAPI.Data.Models
         public GameIndex[] GameIndices { get; set; }
 
         [JsonProperty("height")]
-        public long Height { get; set; }
+        public override long Height { get; set; }
 
         [JsonProperty("held_items")]
         public HeldItem[] HeldItems { get; set; }
 
         [JsonProperty("id")]
-        public long Id { get; set; }
+        public override long Id { get; set; }
 
         [JsonProperty("is_default")]
         public bool IsDefault { get; set; }
@@ -40,7 +38,7 @@ namespace Pokedex.Features.PokeAPI.Data.Models
         public Move[] Moves { get; set; }
 
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public override string Name { get; set; }
 
         [JsonProperty("order")]
         public long Order { get; set; }
@@ -58,7 +56,7 @@ namespace Pokedex.Features.PokeAPI.Data.Models
         public TypeElement[] Types { get; set; }
 
         [JsonProperty("weight")]
-        public long Weight { get; set; }
+        public override long Weight { get; set; }
 
         public Pokemon ToEntity()
         {
@@ -66,7 +64,7 @@ namespace Pokedex.Features.PokeAPI.Data.Models
             {
                 Id = this.Id,
                 Name = this.Name,
-                TypesString = this.Types.ToString(),
+                TypeString = this.Types[0].Type.Name,
                 Height = this.Height,
                 Weight = this.Weight,
                 FrontDefault = this.Sprites.FrontDefault.AbsoluteUri

@@ -6,7 +6,7 @@ namespace Pokedex.Features.PokeAPI.Domain.RepositoriesInterfaces
 {
     public interface IPokeAPIRepository
     {
-        Task<Pokemon> GetPokemon(long pokemonId);
+        Task<Pokemon> GetPokemon(string pokemonName);
 
         Task<Page> GetPage(string pageId);
     }

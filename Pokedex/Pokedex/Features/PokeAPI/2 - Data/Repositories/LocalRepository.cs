@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using LiteDB;
 using Pokedex.Core.Services;
 using Pokedex.Features.PokeAPI.Data.DatasourcesInterfaces;
@@ -27,9 +28,9 @@ namespace Pokedex.Features.PokeAPI.Data.Repositories
             _pokemons.Insert(pokemon);
         }
 
-        public Pokemon GetPokemon(long id)
+        public Pokemon GetPokemon(string pokemonName)
         {
-            return _pokemons.FindById(id);
+            return _pokemons.Find(x => x.Name == pokemonName).FirstOrDefault();
         }
 
         public void SavePage(Page page)

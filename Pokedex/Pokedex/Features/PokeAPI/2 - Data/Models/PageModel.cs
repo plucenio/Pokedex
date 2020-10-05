@@ -10,10 +10,10 @@ namespace Pokedex.Features.PokeAPI.Data.Models
         public long Count { get; set; }
 
         [JsonProperty("next")]
-        public Uri Next { get; set; }
+        public override Uri Next { get; set; }
 
         [JsonProperty("previous")]
-        public Uri Previous { get; set; }
+        public override Uri Previous { get; set; }
 
         [JsonProperty("results")]
         public Result[] Results { get; set; }
@@ -34,9 +34,9 @@ namespace Pokedex.Features.PokeAPI.Data.Models
     public partial class Result : ItemListPokemon
     {
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public override string Name { get; set; }
 
         [JsonProperty("url")]
-        public Uri Url { get; set; }
+        public override Uri Url { get; set; }
     }
 }

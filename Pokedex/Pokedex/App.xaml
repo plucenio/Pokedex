@@ -4,7 +4,19 @@
                         xmlns:prism="http://prismlibrary.com"
                         x:Class="Pokedex.App">
   <Application.Resources>
-
+    <OnPlatform x:TypeArguments="x:String" x:Key="NormalSolid">
+        <On Platform="Android" Value="Pokemon Solid.ttf#Pokemon Solid" />
+        <On Platform="iOS" Value="Pokemon Solid" />
+    </OnPlatform>
+        <OnPlatform x:TypeArguments="x:String" x:Key="NormalHollow">
+        <On Platform="Android" Value="Pokemon Hollow.ttf#Pokemon Hollow" />
+        <On Platform="iOS" Value="Pokemon Hollow" />
+    </OnPlatform>
+    <Style x:Key="LabelStyle" TargetType="Label">
+        <Setter Property="HorizontalTextAlignment" Value="Center"/>
+        <Setter Property="VerticalTextAlignment" Value="Center"/>
+        <Setter Property="FontFamily" Value="{StaticResource NormalHollow}"/>
+    </Style>
     <!-- Application resource dictionary -->
 
   </Application.Resources>
