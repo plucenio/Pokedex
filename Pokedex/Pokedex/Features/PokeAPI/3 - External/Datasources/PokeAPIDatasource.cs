@@ -29,5 +29,26 @@ namespace Pokedex.Features.PokeAPI.External.Datasources
             var str = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<PokemonModel>(str);
         }
+
+        public async Task<PokemonTypeModel[]> GetPokemonTypes()
+        {
+            var response = await _httpClientService.GetAsync($"type");
+            var str = await response.Content.ReadAsStringAsync();
+            var ret = JsonConvert.DeserializeObject<PokemonTypesModel>(str);
+            return ret.Results;
+        }
+
+        public async Task<ItemListPokemonModel[]> GetPokemonsByType(string type)
+        {
+            List<ItemListPokemonModel> itemListPokemonModels = new List<ItemListPokemonModel>();
+            var response = await _httpClientService.GetAsync($"type/{type}");
+            var str = await response.Content.ReadAsStringAsync();
+            var ret = JsonConvert.DeserializeObject<PokemonsByTypeModel>(str);
+            foreach(var i in ret.ItemListPokemonModels)
+            {
+                itemListPokemonModels.Add(i.ItemListPokemonModel);
+            }
+            return itemListPokemonModels.ToArray();
+        }
     }
 }

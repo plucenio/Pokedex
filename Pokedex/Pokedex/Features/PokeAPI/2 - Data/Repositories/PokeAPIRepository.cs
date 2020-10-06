@@ -25,5 +25,17 @@ namespace Pokedex.Features.PokeAPI.Data.Repositories
             var model = await _pokeAPIDatasource.GetPokemon(pokemonName);
             return model.ToEntity();
         }
+
+        public async Task<PokemonType[]> GetPokemonTypes()
+        {
+            var models = await _pokeAPIDatasource.GetPokemonTypes();
+            return (PokemonType[])models;
+        }
+
+        public async Task<ItemListPokemon[]> GetPokemonsByType(string type)
+        {
+            var models = await _pokeAPIDatasource.GetPokemonsByType(type);
+            return (ItemListPokemon[])models;
+        }
     }
 }

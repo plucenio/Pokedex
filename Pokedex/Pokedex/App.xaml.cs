@@ -42,6 +42,7 @@ namespace Pokedex
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
             containerRegistry.RegisterForNavigation<PokemonPopUp, PokemonPopUpViewModel>();
+            containerRegistry.RegisterForNavigation<SelectTypePopUp, SelectTypePopUpViewModel>();
 
             containerRegistry.RegisterPopupNavigationService();
         }

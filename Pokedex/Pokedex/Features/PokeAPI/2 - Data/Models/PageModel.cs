@@ -16,7 +16,7 @@ namespace Pokedex.Features.PokeAPI.Data.Models
         public override Uri Previous { get; set; }
 
         [JsonProperty("results")]
-        public Result[] Results { get; set; }
+        public ItemListPokemonModel[] ItemListPokemonModels { get; set; }
 
         public Page ToEntity(string id)
         {
@@ -25,18 +25,9 @@ namespace Pokedex.Features.PokeAPI.Data.Models
                 Id = id,
                 Next = this.Next,
                 Previous = this.Previous,
-                Pokemons = Results
+                ItemListPokemon = ItemListPokemonModels
             };
             return page;
         }
-    }
-
-    public partial class Result : ItemListPokemon
-    {
-        [JsonProperty("name")]
-        public override string Name { get; set; }
-
-        [JsonProperty("url")]
-        public override Uri Url { get; set; }
     }
 }

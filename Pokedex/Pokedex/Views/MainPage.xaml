@@ -75,17 +75,25 @@
                     </pancake:PancakeView>
                     <StackLayout Orientation="Horizontal"
                                  HorizontalOptions="Center">
-                        <Button CornerRadius="25" Text='&lt;'
+                        <Button CornerRadius="25"
+                                Text='&lt;'
                                 BackgroundColor="White"
                                 HeightRequest="60"
                                 WidthRequest="60"
                                 Command="{Binding PreviousCommand}"/>
-                        <Button CornerRadius="25" Text='>'
+                        <Button CornerRadius="25"
+                                HeightRequest="60"
+                                WidthRequest="80"
+                                Text='search'
+                                BackgroundColor="White"
+                                HorizontalOptions="End"
+                                Command="{Binding SearchByTypeCommand}"/>
+                        <Button CornerRadius="25"
+                                Text='>'
                                 BackgroundColor="White"
                                 HeightRequest="60"
                                 WidthRequest="60"
                                 Command="{Binding NextCommand}"/>
-
                     </StackLayout>
                 </StackLayout>
             </StackLayout>

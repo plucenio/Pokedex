@@ -8,5 +8,9 @@ namespace Pokedex.Features.PokeAPI.Data.Datasources
         Task<PokemonModel> GetPokemon(string pokemonName);
 
         Task<PageModel> GetPage(string pageId);
+
+        Task<PokemonTypeModel[]> GetPokemonTypes();
+
+        Task<ItemListPokemonModel[]> GetPokemonsByType(string type);
     }
 }
