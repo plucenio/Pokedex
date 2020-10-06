@@ -18,6 +18,8 @@ namespace Pokedex.ViewModels
 
         public string Previous { get; set; }
 
+        public string SelectedType { get; set; }
+
         private IEnumerable<ItemListPokemon> pokemons;
 
         public IEnumerable<ItemListPokemon> Pokemons
@@ -53,6 +55,7 @@ namespace Pokedex.ViewModels
             : base(navigationService, pageDialogService)
         {
             Title = "Main Page";
+            SelectedType = string.Empty;
             _usecase = usecase;
             PreviousCommand = new DelegateCommand(async () =>
             {
@@ -60,6 +63,12 @@ namespace Pokedex.ViewModels
                 {
                     if (string.IsNullOrEmpty(Previous))
                         return;
+
+                    if (!string.IsNullOrEmpty(SelectedType))
+                    {
+                        await pageDialogService.DisplayAlertAsync("Search restarted", "search restarted to display all pokemon types", "Ok");
+                        SelectedType = string.Empty;
+                    }
 
                     var ret = await RefreshPage(Previous);
                 });
@@ -73,6 +82,12 @@ namespace Pokedex.ViewModels
                 {
                     if (string.IsNullOrEmpty(Next))
                         return;
+
+                    if (!string.IsNullOrEmpty(SelectedType))
+                    {
+                        await pageDialogService.DisplayAlertAsync("Search restarted", "search restarted to display all pokemon types", "Ok");
+                        SelectedType = string.Empty;
+                    }
 
                     var ret = await RefreshPage(Next);
                 });
@@ -106,6 +121,7 @@ namespace Pokedex.ViewModels
             {
                 _ = await SafelyExecute(async () =>
                   {
+                      SelectedType = message == null ? "" : (string)message;
                       if (string.IsNullOrEmpty((String)message))
                           _ = await RefreshPage(null);
                       else
