@@ -13,6 +13,8 @@ namespace Pokedex.Views
 
         protected override async void OnAppearing()
         {
+            if (Resources["BackgroundAnimation"] is StoryBoard backgroundAnimation)
+                await backgroundAnimation.Begin();
             if (Resources["StoryBoardTranslation"] is StoryBoard storyBoardTranslation)
                 await storyBoardTranslation.Begin();
             base.OnAppearing();

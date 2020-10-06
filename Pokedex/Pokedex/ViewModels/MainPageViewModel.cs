@@ -6,6 +6,7 @@ using Pokedex.Features.PokeAPI.Domain.Entities;
 using Pokedex.Features.PokeAPI.Domain.Usecases;
 using Prism.Commands;
 using Prism.Navigation;
+using Prism.Services;
 
 namespace Pokedex.ViewModels
 {
@@ -45,66 +46,77 @@ namespace Pokedex.ViewModels
 
         private IPokedexUsecase _usecase;
 
-        public MainPageViewModel(INavigationService navigationService, IPokedexUsecase usecase)
-            : base(navigationService)
+        public MainPageViewModel(INavigationService navigationService,
+            IPageDialogService pageDialogService, IPokedexUsecase usecase)
+            : base(navigationService, pageDialogService)
         {
             Title = "Main Page";
             _usecase = usecase;
             PreviousCommand = new DelegateCommand(async () =>
             {
-                if (string.IsNullOrEmpty(Previous))
-                    return;
+                await SafelyExecute(async () =>
+                {
+                    if (string.IsNullOrEmpty(Previous))
+                        return;
 
-                var ret = await RefreshPage(Previous);
+                    var ret = await RefreshPage(Previous);
+                });
             },
                 () => !String.IsNullOrEmpty(Previous)
             );
 
             NextCommand = new DelegateCommand(async () =>
             {
-                if (string.IsNullOrEmpty(Next))
-                    return;
+                await SafelyExecute(async () =>
+                {
+                    if (string.IsNullOrEmpty(Next))
+                        return;
 
-                var ret = await RefreshPage(Next);
+                    var ret = await RefreshPage(Next);
+                });
             },
                 () => !String.IsNullOrEmpty(Next)
             );
 
             ShowPokemonCommand = new DelegateCommand(async () =>
             {
-                var name = Pokemon.Name;
-                await NavigationService.NavigateAsync("NavigationPage/PokemonPopUp",
-                    new NavigationParameters()
-                    {
-                        { Core.Utils.Constants.Constants.pokemonParameter, name }
-                    }
-                );
+                await SafelyExecute(async () =>
+                {
+                    var name = Pokemon.Name;
+                    await NavigationService.NavigateAsync("NavigationPage/PokemonPopUp",
+                        new NavigationParameters()
+                        {
+                            { Core.Utils.Constants.Constants.pokemonParameter, name }
+                        }
+                    );
+                });
             });
         }
 
         private async Task<bool> RefreshPage(string url)
         {
-            Page = await _usecase.GetPage(url);
-            Next = Page.Next?.Query;
-            Previous = Page.Previous?.Query;
-            Pokemons = Page.Pokemons;
-            ((DelegateCommand)PreviousCommand).RaiseCanExecuteChanged();
-            ((DelegateCommand)NextCommand).RaiseCanExecuteChanged();
-            return Page != null;
-        }
-
-        public Xamarin.Forms.ImageSource UriToByteArrayConverter(string uri)
-        {
-            return Xamarin.Forms.ImageSource.FromUri(new Uri(uri));
+            return await SafelyExecute(async () =>
+            {
+                Page = await _usecase.GetPage(url);
+                Next = Page.Next?.Query;
+                Previous = Page.Previous?.Query;
+                Pokemons = Page.Pokemons;
+                ((DelegateCommand)PreviousCommand).RaiseCanExecuteChanged();
+                ((DelegateCommand)NextCommand).RaiseCanExecuteChanged();
+                return Page != null;
+            });
         }
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
         {
-            if (Page == null)
-                _ = await RefreshPage(null);
+            await SafelyExecute(async () =>
+            { 
+                if (Page == null)
+                    _ = await RefreshPage(null);
 
-            NextCommand.CanExecute(null);
-            base.OnNavigatedTo(parameters);
+                NextCommand.CanExecute(null);
+                base.OnNavigatedTo(parameters);
+            });
         }
     }
 }
