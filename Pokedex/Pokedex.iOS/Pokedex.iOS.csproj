@@ -194,6 +194,8 @@
     <BundleResource Include="Resources\pikachu.json" />
     <BundleResource Include="Resources\Pokemon Solid.ttf" />
     <BundleResource Include="Resources\Pokemon Hollow.ttf" />
+    <BundleResource Include="Resources\background.json" />
+    <BundleResource Include="Resources\pokeapi.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

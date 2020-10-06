@@ -9,73 +9,86 @@
              BackgroundColor="Yellow">
     <ContentPage.Resources>
         <ResourceDictionary>
+            <xamanimation:StoryBoard x:Key="BackgroundAnimation"
+                                     Target="{x:Reference backgroundJson}">
+                <xamanimation:FadeToAnimation Easing="BounceIn"
+                                              Opacity="0.7"
+                                              Duration="2750"/>
+
+            </xamanimation:StoryBoard>
             <xamanimation:StoryBoard x:Key="StoryBoardTranslation"
                                      Target="{x:Reference MainStackLayout}">
                 <xamanimation:TranslateToAnimation TranslateY="0"
-                                                   Duration="250"
-                                                   Delay="2200"/>
-                <xamanimation:ColorAnimation Target="{x:Reference backgroundpage}"
-                                             ToColor="LightSeaGreen"
-                                             Duration="500"/>
+                                                   Duration="250"/>
             </xamanimation:StoryBoard>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
         <Grid>
+            <lottie:AnimationView x:Name="backgroundJson" 
+	                              Animation="background.json"
+                                  Opacity="0"
+	                              AutoPlay="True"
+                                  Scale="2" />
             <lottie:AnimationView x:Name="animationView" 
 	                              Animation="pikachu.json" 
 	                              AutoPlay="True"
 	                              VerticalOptions="FillAndExpand" 
 	                              HorizontalOptions="FillAndExpand" />
-            <StackLayout x:Name="MainStackLayout"
-                     TranslationY="-1000">
-            <pancake:PancakeView CornerRadius="25"
-                                 BackgroundGradientAngle="90"
-                                 BackgroundGradientStartColor="White"
-                                 BackgroundGradientEndColor="Black"
-                                 BackgroundColor="White"
-                                 Margin="20,40,20,40">
-                <ListView ItemsSource="{Binding Pokemons}"
-                          ItemSelected="ListView_ItemSelected"
-                          SelectedItem="{Binding Pokemon}"
-                          RowHeight="90">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="40*"/>
-                                        <ColumnDefinition Width="50*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Image Source="{Binding Front_Default}"/>
-                                    <Label Text="{Binding Name}"
-                                            FontSize="Subtitle"
-                                            TextColor="Black"
-                                            Style="{StaticResource LabelStyle}"
-                                            Grid.Column="1"
-                                            VerticalOptions="Center"
-                                            HorizontalOptions="Start"/>
-                                </Grid>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </pancake:PancakeView>
-            <StackLayout Orientation="Horizontal"
-                         HorizontalOptions="Center">
-                <Button CornerRadius="25" Text='&lt;'
-                        BackgroundColor="White"
-                        HeightRequest="75"
-                        WidthRequest="75"
-                        Command="{Binding PreviousCommand}"/>
-                <Button CornerRadius="25" Text='>'
-                        BackgroundColor="White"
-                        HeightRequest="75"
-                        WidthRequest="75"
-                        Command="{Binding NextCommand}"/>
+            <StackLayout>
+                <Image Source="pokeapi.png"
+                       Scale="0.8"
+                       VerticalOptions="Center"></Image>
+                <StackLayout x:Name="MainStackLayout"
+                         TranslationY="-1000">
+                    <pancake:PancakeView CornerRadius="25"
+                                         BackgroundGradientAngle="90"
+                                         BackgroundGradientStartColor="White"
+                                         BackgroundGradientEndColor="Black"
+                                         BackgroundColor="White"
+                                         Margin="10">
+                        <ListView ItemsSource="{Binding Pokemons}"
+                                  ItemSelected="ListView_ItemSelected"
+                                  SelectedItem="{Binding Pokemon}"
+                                  RowHeight="80">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="40*"/>
+                                                <ColumnDefinition Width="50*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Image Source="{Binding Front_Default}"/>
+                                            <Label Text="{Binding Name}"
+                                                    FontSize="Subtitle"
+                                                    TextColor="Black"
+                                                    Style="{StaticResource LabelStyle}"
+                                                    Grid.Column="1"
+                                                    VerticalOptions="Center"
+                                                    HorizontalOptions="Start"/>
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </pancake:PancakeView>
+                    <StackLayout Orientation="Horizontal"
+                                 HorizontalOptions="Center">
+                        <Button CornerRadius="25" Text='&lt;'
+                                BackgroundColor="White"
+                                HeightRequest="60"
+                                WidthRequest="60"
+                                Command="{Binding PreviousCommand}"/>
+                        <Button CornerRadius="25" Text='>'
+                                BackgroundColor="White"
+                                HeightRequest="60"
+                                WidthRequest="60"
+                                Command="{Binding NextCommand}"/>
 
+                    </StackLayout>
+                </StackLayout>
             </StackLayout>
-        </StackLayout>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
