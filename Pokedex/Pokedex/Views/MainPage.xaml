@@ -47,13 +47,14 @@
                                         <ColumnDefinition Width="40*"/>
                                         <ColumnDefinition Width="50*"/>
                                     </Grid.ColumnDefinitions>
-                                        <Label Text="{Binding Name}"
-                                               FontSize="Subtitle"
-                                               TextColor="Black"
-                                               Style="{StaticResource LabelStyle}"
-                                               Grid.Column="1"
-                                               VerticalOptions="Center"
-                                               HorizontalOptions="Start"/>
+                                    <Image Source="{Binding Front_Default}"/>
+                                    <Label Text="{Binding Name}"
+                                            FontSize="Subtitle"
+                                            TextColor="Black"
+                                            Style="{StaticResource LabelStyle}"
+                                            Grid.Column="1"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="Start"/>
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>

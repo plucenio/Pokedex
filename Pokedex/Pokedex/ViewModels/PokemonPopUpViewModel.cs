@@ -41,19 +41,22 @@ namespace Pokedex.ViewModels
         public ICommand CloseCommand { get; set; }
 
         public PokemonPopUpViewModel(INavigationService navigationService, IPageDialogService pageDialogService, IPokedexUsecase usecase)
-            : base(navigationService)
+            : base(navigationService, pageDialogService)
         {
             _pageDialogService = pageDialogService;
             _usecase = usecase;
             CloseCommand = new DelegateCommand(async () =>
             {
-                await NavigationService.GoBackAsync();
+                await SafelyExecute(async () =>
+                {
+                    await NavigationService.GoBackAsync();
+                });
             });
         }
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
         {
-            try
+            await SafelyExecute(async () =>
             {
                 if (parameters.ContainsKey(Core.Utils.Constants.Constants.pokemonParameter))
                 {
@@ -62,11 +65,7 @@ namespace Pokedex.ViewModels
                         ImgSource = new Uri(Pokemon.FrontDefault);
                 }
                 base.OnNavigatedTo(parameters);
-            }
-            catch (Exception ex)
-            {
-                await _pageDialogService.DisplayAlertAsync("Error", ex.Message, "Ok");
-            }
+            });
         }
     }
 }
