@@ -50,7 +50,7 @@
                         <ListView ItemsSource="{Binding Pokemons}"
                                   ItemSelected="ListView_ItemSelected"
                                   SelectedItem="{Binding Pokemon}"
-                                  RowHeight="80">
+                                  RowHeight="70">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>
