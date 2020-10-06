@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<popup:PopupPage xmlns="http://xamarin.com/schemas/2014/forms" 
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+                 x:Class="Pokedex.Views.SelectTypePopUp"
+                 HasSystemPadding="False" >
+    <pancake:PancakeView CornerRadius="25"
+                         BackgroundGradientStartColor="White"
+                         BackgroundGradientEndColor="LightBlue"
+                         BackgroundGradientAngle="90"
+                         BackgroundColor="White"
+                         Margin="20,100,20,100">
+        <StackLayout Margin="20">
+            <Label Text="Select a pokemon type"
+                   FontSize="Title"
+                   TextColor="Black"
+                   Style="{StaticResource LabelStyle}"></Label>
+            <ListView ItemsSource="{Binding Types}"
+                      ItemSelected="ListView_ItemSelected"
+                      SelectedItem="{Binding Type}"
+                      RowHeight="50">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid>
+                                            <Label Text="{Binding Name}"
+                                                   FontSize="Body"
+                                                   TextColor="Black"
+                                                   Style="{StaticResource LabelStyle}"
+                                                   VerticalOptions="Center"
+                                                   HorizontalOptions="Center"/>
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+            <Button Text="Close"
+                    Command="{Binding CloseCommand}"/>
+        </StackLayout>
+    </pancake:PancakeView>
+</popup:PopupPage>

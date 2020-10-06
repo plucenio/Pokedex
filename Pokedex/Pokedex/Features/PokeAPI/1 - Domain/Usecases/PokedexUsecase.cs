@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Pokedex.Features.PokeAPI.Data.DatasourcesInterfaces;
 using Pokedex.Features.PokeAPI.Domain.Entities;
 using Pokedex.Features.PokeAPI.Domain.RepositoriesInterfaces;
@@ -10,6 +11,10 @@ namespace Pokedex.Features.PokeAPI.Domain.Usecases
         Task<Pokemon> GetPokemon(string pokemonName);
 
         Task<Page> GetPage(string pageId);
+
+        Task<PokemonType[]> GetPokemonTypes();
+
+        Task<ItemListPokemon[]> GetPokemonsByType(string type);
     }
 
     public class PokedexUsecase : IPokedexUsecase
@@ -46,6 +51,16 @@ namespace Pokedex.Features.PokeAPI.Domain.Usecases
                 _localRepository.SavePage(page);
             }
             return page;
+        }
+
+        public async Task<PokemonType[]> GetPokemonTypes()
+        {
+            return await _pokeAPIRepository.GetPokemonTypes();
+        }
+
+        public async Task<ItemListPokemon[]> GetPokemonsByType(string type)
+        {
+            return await _pokeAPIRepository.GetPokemonsByType(type);
         }
     }
 }

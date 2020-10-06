@@ -44,6 +44,8 @@ namespace Pokedex.ViewModels
 
         public ICommand ShowPokemonCommand { get; set; }
 
+        public ICommand SearchByTypeCommand { get; set; }
+
         private IPokedexUsecase _usecase;
 
         public MainPageViewModel(INavigationService navigationService,
@@ -91,6 +93,25 @@ namespace Pokedex.ViewModels
                     );
                 });
             });
+
+            SearchByTypeCommand = new DelegateCommand(async () =>
+            {
+                await SafelyExecute(async () =>
+                {
+                    await NavigationService.NavigateAsync("NavigationPage/SelectTypePopUp");
+                });
+            });
+
+            Xamarin.Forms.MessagingCenter.Subscribe<object>(this, "SearchByTypes", async message =>
+            {
+                _ = await SafelyExecute(async () =>
+                  {
+                      if (string.IsNullOrEmpty((String)message))
+                          _ = await RefreshPage(null);
+                      else
+                          Pokemons = await usecase.GetPokemonsByType((string)message);
+                  });
+            });
         }
 
         private async Task<bool> RefreshPage(string url)
@@ -100,7 +121,7 @@ namespace Pokedex.ViewModels
                 Page = await _usecase.GetPage(url);
                 Next = Page.Next?.Query;
                 Previous = Page.Previous?.Query;
-                Pokemons = Page.Pokemons;
+                Pokemons = Page.ItemListPokemon;
                 ((DelegateCommand)PreviousCommand).RaiseCanExecuteChanged();
                 ((DelegateCommand)NextCommand).RaiseCanExecuteChanged();
                 return Page != null;

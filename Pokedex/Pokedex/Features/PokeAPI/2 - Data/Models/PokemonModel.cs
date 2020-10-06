@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Newtonsoft.Json;
 using Pokedex.Features.PokeAPI.Domain.Entities;
 
@@ -41,7 +40,6 @@ namespace Pokedex.Features.PokeAPI.Data.Models
             };
         }
     }
-
 
     public partial class Species
     {

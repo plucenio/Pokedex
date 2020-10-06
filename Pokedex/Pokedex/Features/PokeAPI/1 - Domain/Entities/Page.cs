@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Pokedex.Features.PokeAPI.Domain.Entities
 {
@@ -11,6 +10,6 @@ namespace Pokedex.Features.PokeAPI.Domain.Entities
 
         public virtual Uri Previous { get; set; }
 
-        public virtual ItemListPokemon[] Pokemons { get; set; }
+        public virtual ItemListPokemon[] ItemListPokemon { get; set; }
     }
 }
